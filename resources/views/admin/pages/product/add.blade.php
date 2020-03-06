@@ -5,14 +5,6 @@ Thêm loại sản phẩm
 @endsection
 
 @section('content')
-<<<<<<< HEAD
-<<<<<<< HEAD
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbb
-=======
->>>>>>> parent of 23c138a... test
-=======
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaa
->>>>>>> parent of 77089b4... test 2
 <div class="card shadow mb-4">
 	<div class="card-header py-3">
 		<h6 class="m-0 font-weight-bold text-primary">Thêm sản phẩm</h6>
