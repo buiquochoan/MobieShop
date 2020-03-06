@@ -5,7 +5,10 @@ Thêm loại sản phẩm
 @endsection
 
 @section('content')
+<<<<<<< HEAD
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbb
+=======
+>>>>>>> parent of 23c138a... test
 <div class="card shadow mb-4">
 	<div class="card-header py-3">
 		<h6 class="m-0 font-weight-bold text-primary">Thêm sản phẩm</h6>
@@ -24,6 +27,13 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbb
 					</div>
 					@endif
 				</fieldset>
+				<div class="form-group">
+					<label>Status</label>
+					<select name="status" class="form-control">
+						<option value="1">Hiển thị</option>
+						<option value="0">Không hiển thị</option>
+					</select>
+				</div>
 				<div class="form-group">
 					<label>Description</label>
 					<textarea name="description" id="description" class="form-control" placeholder="Nhập mô tả sản phẩm"></textarea>
@@ -69,13 +79,6 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbb
 						@foreach($producttype as $val)
 						<option value="{{ $val->id }}">{{ $val->name }}</option>
 						@endforeach
-					</select>
-				</div>
-				<div class="form-group">
-					<label>Status</label>
-					<select name="status" class="form-control">
-						<option value="1">Hiển thị</option>
-						<option value="0">Không hiển thị</option>
 					</select>
 				</div>
 				<button type="submit" class="btn btn-success">Submit Button</button>
