@@ -45,11 +45,22 @@ class ProductController extends Controller
     {
         //
         $data = $request->all();
-        $data['slug'] = utf8tourl($request->name);
-        if(Product::create($data)){
-            return redirect()->route('product.index');
+        if ($request->hasFile('myFile')) {
+            $file = $request->myFile;
+            $fileName = date('d-m-Y').'_'.rand().'_'.utf8tourl($file->getClientOriginalName());
+            if($file->move('img/upload/product', $fileName)){
+                $data['slug'] = utf8tourl($request->name);
+                $data['image'] = $fileName;
+                if(Product::create($data)){
+                    return redirect()->route('product.index');
+                }else{
+                    return back()->with(['customErrors' => 0,'customMessage' => 'Không thêm mới được sản phẩm']);
+                }
+            }else{
+
+            }
         }else{
-            return back()->with(['message' => 'Lỗi éo gì rồi']);
+
         }
     }
 

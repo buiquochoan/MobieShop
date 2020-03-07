@@ -55,7 +55,7 @@ Danh mục sản phẩm
                         <td>{{ number_format($val->promotional) }}</td>
                         <td>{{ $val->Category->name}}</td>
                         <td>{{ $val->ProductType->name}}</td>
-                        <td></td>
+                        <td><img src="img/upload/product/{{ $val->image }}" style="width: 100px;height: 100px"></td>
                         <td>
                             @if($val->status == 1) {{ "Hiển thị" }} @else {{ "Không hiển thị" }} @endif
                         </td>

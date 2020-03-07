@@ -12,7 +12,7 @@ Thêm loại sản phẩm
 	<div class="row" style="margin: 5px">
 		<div class="col-lg-12">
 
-			<form role="form" action="{{ route('product.store') }}" method="post">
+			<form role="form" action="{{ route('product.store') }}" method="post" enctype="multipart/form-data">
 				@csrf
 				<fieldset class="form-group">
 					<label>Name</label>
@@ -77,6 +77,14 @@ Thêm loại sản phẩm
 						@endforeach
 					</select>
 				</div>
+				<div class="form-group">
+					<input type="file" name="myFile">
+				</div>
+				@if($errors->has('myFile'))
+				<div class="alert alert-danger">
+					{{ $errors->first('myFile') }}
+				</div>
+				@endif
 				<button type="submit" class="btn btn-success">Submit Button</button>
 				<button type="reset" class="btn btn-primary">Reset Button</button>
 

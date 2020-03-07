@@ -24,25 +24,31 @@ class StoreProductRequest extends FormRequest
     public function rules()
     {
         return [
-            //
-            'name' => 'required|min:2|max:255',
+            /*'name' => 'required|min:2|max:255',
             'quantity' => 'numeric|required',
             'price' => 'numeric|required',
-            'promotional' => 'numeric',
+            'promotional' => 'numeric',*/
+            'myFile' => 'mimes:jpg,jpeg,png,bmp,tiff|max:5120|required',
         ];
 
     }
     public function messages()
     {
         return [
-            'name.required' => 'Tên không được để trống',
-            'quantity.required' => 'Số lượng không được để trống',
-            'quantity.numeric' => 'Số lượng phải là số',
-
-            'price.required'  => 'Giá không được để trống',
-            'price.numeric'  => 'Giá phải là số',
-
-            'promotional.required'  => 'Giảm giá phải là số',
+            'min' => ':attribute phải từ 2 đến 255 ký tự',
+            'max' => ':attribute phải từ 2 đến 255 ký tự hoặc file nhỏ hơn 5MB',
+            'required' => ':attribute không được để trống',
+            'numeric' => ':attribute phải là số',
+            'mimes' => ':attribute phải là ảnh',
+        ];
+    } 
+    public function attributes(){
+        return [
+             'name' => 'Tên sản phẩm',   
+             'quantity'=>'Số lượng',
+             'price'=>'Đơn giá',
+             'promotional'=>'Khuyến mại',
+             'myFile' => 'File upload',
         ];
     }
 }
