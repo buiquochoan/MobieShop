@@ -11,9 +11,9 @@ class Categories extends Model
     protected $fillable = [
     	'name','slug','status',
     ];
-    public function productType()
+    public function ProductTypes()
     {
     	# code...
-    	return $this->hasMany('App\Models\ProductType','idCategory','id');
+    	return $this->hasMany('App\Models\ProductTypes','idCategory','id');
     }
 }

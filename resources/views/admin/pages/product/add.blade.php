@@ -15,8 +15,8 @@ Thêm loại sản phẩm
 			<form role="form" action="{{ route('product.store') }}" method="post" enctype="multipart/form-data">
 				@csrf
 				<fieldset class="form-group">
-					<label>Name</label>
-					<input class="form-control" name="name" placeholder="Nhập tên danh mục">
+					<label>Tên sản phẩm</label>
+					<input class="form-control" name="name" placeholder="Nhập tên sản phẩm">
 					@if($errors->has('name'))
 					<div class="alert alert-danger">
 						{{ $errors->first('name') }}
@@ -24,18 +24,18 @@ Thêm loại sản phẩm
 					@endif
 				</fieldset>
 				<div class="form-group">
-					<label>Status</label>
+					<label>Trạng thái</label>
 					<select name="status" class="form-control">
 						<option value="1">Hiển thị</option>
 						<option value="0">Không hiển thị</option>
 					</select>
 				</div>
 				<div class="form-group">
-					<label>Description</label>
-					<textarea name="description" id="description" class="form-control" placeholder="Nhập mô tả sản phẩm"></textarea>
+					<label>Mô tả</label>
+					<textarea name="description" id="description" class="form-control ckeditor" placeholder="Nhập mô tả sản phẩm"></textarea>
 				</div>
 				<div class="form-group">
-					<label>Quantity</label>
+					<label>Số lượng</label>
 					<input name="quantity" id="quantity" class="form-control" placeholder="Số lượng">
 				</div>
 				@if($errors->has('quantity'))
@@ -44,7 +44,7 @@ Thêm loại sản phẩm
 				</div>
 				@endif
 				<div class="form-group">
-					<label>Price</label>
+					<label>Đơn giá</label>
 					<input name="price" id="price" class="form-control" placeholder="Giá">
 				</div>
 				@if($errors->has('price'))
@@ -53,7 +53,7 @@ Thêm loại sản phẩm
 				</div>
 				@endif
 				<div class="form-group">
-					<label>Promotional</label>
+					<label>Giảm giá</label>
 					<input name="promotional" id="promotional" class="form-control" placeholder="Giảm giá ">
 				</div>
 				@if($errors->has('promotional'))
@@ -62,16 +62,16 @@ Thêm loại sản phẩm
 				</div>
 				@endif
 				<div class="form-group">
-					<label>Category</label>
-					<select name="idCategory" class="form-control">
+					<label>Danh mục sản phẩm</label>
+					<select name="idCategory" class="form-control idCategory" onchange="changeCategory()">
 						@foreach($category as $val)
 						<option value="{{ $val->id }}">{{ $val->name }}</option>
 						@endforeach
 					</select>
 				</div>
 				<div class="form-group">
-					<label>Product Type</label>
-					<select name="idProductType" class="form-control">
+					<label>Loại sản phẩm</label>
+					<select name="idProductType" class="form-control idProductType">
 						@foreach($producttype as $val)
 						<option value="{{ $val->id }}">{{ $val->name }}</option>
 						@endforeach

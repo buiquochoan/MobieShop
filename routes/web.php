@@ -14,9 +14,9 @@
 Route::get('/', function () {
     return view('admin.pages.index');
 });
-
 Route::group(['prefix' => 'admin'],function(){
 	Route::resource('category','CategoryController');
 	Route::resource('productType','ProductTypeController');
 	Route::resource('product','ProductController');
+	Route::get('ajaxProductTypeController/{idCategory}','ajaxProductTypeController@getProductType');
 });

@@ -40,7 +40,7 @@ Danh mục loại sản phẩm
                         <td>
                             @if($val->status == 1) {{ "Hiển thị" }} @else {{ "Không hiển thị" }} @endif
                         </td>
-                        <td>{{ $val->Category->name}}</td>
+                        <td>{{ empty($val->Category->name) ? '' : $val->Category->name }}</td>
                         <td>
                             <button class="btn btn-primary editProductType" title="{{ 'Sửa '.$val->name }}" data-toggle="modal" data-target="#modalSuaType" data-id="{{ $val->id }}"><i class="fas fa-edit"></i>
                             </button>

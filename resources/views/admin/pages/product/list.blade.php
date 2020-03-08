@@ -53,9 +53,14 @@ Danh mục sản phẩm
                         <td>{{ number_format($val->quantity) }}</td>
                         <td>{{ number_format($val->price) }}</td>
                         <td>{{ number_format($val->promotional) }}</td>
-                        <td>{{ $val->Category->name}}</td>
-                        <td>{{ $val->ProductType->name}}</td>
-                        <td><img src="img/upload/product/{{ $val->image }}" style="width: 100px;height: 100px"></td>
+                        <td>
+                            {{ empty($val->Category->name) ? '' : $val->Category->name }}</td>
+                        <td>{{ empty($val->ProductType->name) ? '' : $val->ProductType->name }}</td>
+                        <td>
+                            @if(!empty($val->image))
+                            <a data-fancybox="gallery" href="img/upload/product/{{ $val->image }}"><img style="width: 100px;height: 100px" src="img/upload/product/{{ $val->image }}"></a>
+                            @endif
+                        </td>
                         <td>
                             @if($val->status == 1) {{ "Hiển thị" }} @else {{ "Không hiển thị" }} @endif
                         </td>

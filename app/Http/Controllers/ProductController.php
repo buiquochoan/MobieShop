@@ -30,8 +30,9 @@ class ProductController extends Controller
     public function create()
     {
         //
-        $producttype = ProductTypes::where('status',1)->get();
         $category = Categories::where('status',1)->get();
+        $categoryFirstId = Categories::first()->id;
+        $producttype = ProductTypes::where('idCategory',$categoryFirstId)->where('status',1)->get();
         return view('admin.pages.product.add',compact(['producttype','category']));
     }
 
@@ -85,8 +86,9 @@ class ProductController extends Controller
     {
         //
         $product = Product::find($id);
-        $producttype = ProductTypes::where('status',1)->get();
         $category = Categories::where('status',1)->get();
+        $categoryFirstId = Categories::first()->id;
+        $producttype = ProductTypes::where('idCategory',$categoryFirstId)->where('status',1)->get();
         return response()->json(['product' => $product,'producttype' => $producttype,'category' => $category]);
     }
 
