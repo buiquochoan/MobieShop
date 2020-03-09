@@ -88,55 +88,42 @@ Danh mục sản phẩm
                 <h4 class="modal-title">Chỉnh sửa sản phẩm <span class="title"></p></h4>
             </div>
             <div class="modal-body">
-                <form role="form" action="{{ route('product.store') }}" method="post" enctype="multipart/form-data">
-                @csrf
+                <form id="sfmProduct" enctype="multipart/form-data">
                 <fieldset class="form-group">
                     <label>Tên sản phẩm</label>
-                    <input class="form-control" name="name" placeholder="Nhập tên sản phẩm">
-                    @if($errors->has('name'))
-                    <div class="alert alert-danger">
-                        {{ $errors->first('name') }}
+                    <input class="form-control name" name="name" placeholder="Nhập tên sản phẩm">
+                    <div class="alert alert-danger aleartName" style="">
                     </div>
-                    @endif
                 </fieldset>
                 <div class="form-group">
                     <label>Trạng thái</label>
-                    <select name="status" class="form-control">
+                    <select name="status" class="form-control status">
                         <option value="1">Hiển thị</option>
                         <option value="0">Không hiển thị</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Mô tả</label>
-                    <textarea name="description" id="description" class="form-control ckeditor" placeholder="Nhập mô tả sản phẩm"></textarea>
+                    <textarea name="description" id="description" class="form-control ckeditor description" placeholder="Nhập mô tả sản phẩm"></textarea>
                 </div>
                 <div class="form-group">
                     <label>Số lượng</label>
-                    <input name="quantity" id="quantity" class="form-control" placeholder="Số lượng">
+                    <input name="quantity" id="quantity" class="form-control quantity" placeholder="Số lượng">
                 </div>
-                @if($errors->has('quantity'))
-                <div class="alert alert-danger">
-                    {{ $errors->first('quantity') }}
+                <div class="alert alert-danger alertQuantiTy">
                 </div>
-                @endif
                 <div class="form-group">
                     <label>Đơn giá</label>
-                    <input name="price" id="price" class="form-control" placeholder="Giá">
+                    <input name="price" id="price" class="form-control price" placeholder="Giá">
                 </div>
-                @if($errors->has('price'))
-                <div class="alert alert-danger">
-                    {{ $errors->first('price') }}
+                <div class="alert alert-danger alertPrice">
                 </div>
-                @endif
                 <div class="form-group">
                     <label>Giảm giá</label>
-                    <input name="promotional" id="promotional" class="form-control" placeholder="Giảm giá ">
+                    <input name="promotional" id="promotional" class="form-control promotional" placeholder="Giảm giá ">
                 </div>
-                @if($errors->has('promotional'))
-                <div class="alert alert-danger">
-                    {{ $errors->first('promotional') }}
+                <div class="alert alert-danger alertPromotional">
                 </div>
-                @endif
                 <div class="form-group">
                     <label>Danh mục sản phẩm</label>
                     <select name="idCategory" class="form-control idCategory" onchange="changeCategory()">
@@ -147,20 +134,19 @@ Danh mục sản phẩm
                     <select name="idProductType" class="form-control idProductType">
                     </select>
                 </div>
+                <div class="form-group" id="imgPruduct" class="imgPruduct">
+                </div>
                 <div class="form-group">
                     <input type="file" name="myFile">
                 </div>
-                @if($errors->has('myFile'))
-                <div class="alert alert-danger">
-                    {{ $errors->first('myFile') }}
+                <div class="alert alert-danger alertImage">
                 </div>
-                @endif
-                <button type="submit" class="btn btn-success">Submit Button</button>
-                <button type="reset" class="btn btn-primary">Reset Button</button>
             </form>
+            <div class="alert alertUpdateProduct">
             </div>
+            <button type="submit" class="btn btn-success btnUpdateProduct" id="btnUpdateProduct">Submit Button</button>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
 

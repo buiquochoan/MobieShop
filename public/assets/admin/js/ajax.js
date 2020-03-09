@@ -5,6 +5,7 @@ $.ajaxSetup({
 });
 $(document).ready(function() {
 	// body...
+	$('.alert').hide();
 	$('.edit').click(function() {
 		// body... 
 		let id = $(this).data('id');
@@ -146,8 +147,15 @@ $(document).ready(function() {
 			url:'/admin/product/'+id+'/edit',
 			dataType:'json',
 			success:function(data){
+				$('.inputIdProduct').val(id);
 				$('.name').val(data.product.name);
-				$('.description').val(data.product.description);
+				//$('.description').val(data.product.description);
+				CKEDITOR.instances['description'].setData(data.product.description);
+				if(data.product.image.length > 0){
+					$('#imgPruduct').html('<img src="img/upload/product/'+data.product.image+'" style="height: 100px;width:100px">')
+				}else{
+					$('#imgPruduct').html("");
+				}
 				$('.quantity').val(data.product.quantity);
 				$('.price').val(data.product.price);
 				$('.promotional').val(data.product.promotional);
@@ -189,4 +197,64 @@ $(document).ready(function() {
 			}
 		});
 	});
+
+	$('.btnUpdateProduct').click(function(){
+		var form_data = new FormData($('#sfmProduct')[0]);
+		var id = $('.inputIdProduct').val();
+		var description = CKEDITOR.instances.description.getData();
+		form_data.append('inputIdProduct',id);
+		form_data.append('description',description);
+		$.ajax({
+			url:'admin/product/'+id,
+			data:form_data,
+			dataType:'json',
+			type:'post',
+			contentType: false,
+			cache: false,
+			processData:false,
+			success:function(data){
+				if(typeof(data.name) != "undefined"){
+					$('.aleartName').html(data.name).show();
+				}else{
+					$('.aleartName').html("").hide();
+				}
+				if(typeof(data.quantity)!= "undefined"){
+					$('.alertQuantiTy').html(data.quantity).show();
+				}else{
+					$('.alertQuantiTy').html("").hide();
+				}
+				if(typeof(data.price)!= "undefined"){
+					$('.alertPrice').html(data.price).show();
+				}else{
+					$('.alertPrice').html("").hide();
+				}
+				if(typeof(data.promotional)!= "undefined"){
+					$('.alertPromotional').html(data.promotional).show();
+				}else{
+					$('.alertPromotional').html("").hide();
+				}
+				if(typeof(data.myFile)!= "undefined"){
+					$('.alertImage').html(data.myFile).show();
+				}else{
+					$('.alertImage').html("").hide();
+				}
+				if(typeof(data.error)!= "undefined"){
+					if(data.error == 0){
+						$('.alertUpdateProduct').removeClass('alert-danger').addClass('alert-success').html(data.message).show();
+						setTimeout(function(){
+							window.location.reload(); 
+						}, 1000);
+					}else{
+						$('.alertUpdateProduct').addClass('alert-danger').removeClass('alert-success').html(data.message).show();
+					}
+				}
+			}
+		})
+	});
+	/*$('.sfmProduct').on('submit',function(e){
+		e.preventDefault();
+		$.ajax({
+			url:'admin/product/'+id,
+		});
+	});*/
 });
