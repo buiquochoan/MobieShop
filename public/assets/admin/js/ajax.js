@@ -168,4 +168,25 @@ $(document).ready(function() {
 			}
 		});
 	});
+
+
+	$('.btnDeleteProduct').click(function(){
+		let id = $(this).data('id');
+		$('.inputIdProduct').val(id);
+	});
+
+	$('.btnYesProduct').click(function(){
+		let id = $('.inputIdProduct').val();
+		$.ajax({
+			url:'admin/product/'+id,
+			type:'delete',
+			dataType:'json',
+			success:function(data){
+				$('.divMessageDelete').html(data);
+				setTimeout(function(){
+					window.location.reload(); 
+				}, 1000);
+			}
+		});
+	});
 });

@@ -85,13 +85,14 @@ Danh mục sản phẩm
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Chỉnh sửa product <span class="title"></p></h4>
+                <h4 class="modal-title">Chỉnh sửa sản phẩm <span class="title"></p></h4>
             </div>
             <div class="modal-body">
-                <form role="form">
+                <form role="form" action="{{ route('product.store') }}" method="post" enctype="multipart/form-data">
+                @csrf
                 <fieldset class="form-group">
-                    <label>Name</label>
-                    <input class="form-control name" name="name" placeholder="Nhập tên danh mục">
+                    <label>Tên sản phẩm</label>
+                    <input class="form-control" name="name" placeholder="Nhập tên sản phẩm">
                     @if($errors->has('name'))
                     <div class="alert alert-danger">
                         {{ $errors->first('name') }}
@@ -99,12 +100,19 @@ Danh mục sản phẩm
                     @endif
                 </fieldset>
                 <div class="form-group">
-                    <label>Description</label>
-                    <textarea name="description" id="description" class="form-control description" placeholder="Nhập mô tả sản phẩm"></textarea>
+                    <label>Trạng thái</label>
+                    <select name="status" class="form-control">
+                        <option value="1">Hiển thị</option>
+                        <option value="0">Không hiển thị</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label>Quantity</label>
-                    <input name="quantity" id="quantity" class="form-control quantity" placeholder="Số lượng">
+                    <label>Mô tả</label>
+                    <textarea name="description" id="description" class="form-control ckeditor" placeholder="Nhập mô tả sản phẩm"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Số lượng</label>
+                    <input name="quantity" id="quantity" class="form-control" placeholder="Số lượng">
                 </div>
                 @if($errors->has('quantity'))
                 <div class="alert alert-danger">
@@ -112,8 +120,8 @@ Danh mục sản phẩm
                 </div>
                 @endif
                 <div class="form-group">
-                    <label>Price</label>
-                    <input name="price" id="price" class="form-control price" placeholder="Giá">
+                    <label>Đơn giá</label>
+                    <input name="price" id="price" class="form-control" placeholder="Giá">
                 </div>
                 @if($errors->has('price'))
                 <div class="alert alert-danger">
@@ -121,8 +129,8 @@ Danh mục sản phẩm
                 </div>
                 @endif
                 <div class="form-group">
-                    <label>Promotional</label>
-                    <input name="promotional" id="promotional" class="form-control promotional" placeholder="Giảm giá ">
+                    <label>Giảm giá</label>
+                    <input name="promotional" id="promotional" class="form-control" placeholder="Giảm giá ">
                 </div>
                 @if($errors->has('promotional'))
                 <div class="alert alert-danger">
@@ -130,26 +138,28 @@ Danh mục sản phẩm
                 </div>
                 @endif
                 <div class="form-group">
-                    <label>Category</label>
-                    <select name="idCategory" class="form-control idCategory">
+                    <label>Danh mục sản phẩm</label>
+                    <select name="idCategory" class="form-control idCategory" onchange="changeCategory()">
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Product Type</label>
+                    <label>Loại sản phẩm</label>
                     <select name="idProductType" class="form-control idProductType">
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Status</label>
-                    <select name="status" class="form-control status">
-                        <option value="1">Hiển thị</option>
-                        <option value="0">Không hiển thị</option>
-                    </select>
+                    <input type="file" name="myFile">
                 </div>
+                @if($errors->has('myFile'))
+                <div class="alert alert-danger">
+                    {{ $errors->first('myFile') }}
+                </div>
+                @endif
+                <button type="submit" class="btn btn-success">Submit Button</button>
+                <button type="reset" class="btn btn-primary">Reset Button</button>
             </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success btnSuaProduct">Submit Button</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -163,7 +173,7 @@ Danh mục sản phẩm
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Xóa product</h4>
+                <h4 class="modal-title">Xóa sản phẩm</h4>
             </div>
             <div class="modal-body">
               <div class="col-lg-12 divMessageDelete text-center font-weight-bold" style="font-size: 18px">

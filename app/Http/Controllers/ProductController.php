@@ -31,7 +31,8 @@ class ProductController extends Controller
     {
         //
         $category = Categories::where('status',1)->get();
-        $categoryFirstId = Categories::first()->id;
+        $categoryFirstId = Categories::first();
+        $categoryFirstId = empty($categoryFirstId) ? 0 : $categoryFirstId->id;
         $producttype = ProductTypes::where('idCategory',$categoryFirstId)->where('status',1)->get();
         return view('admin.pages.product.add',compact(['producttype','category']));
     }
@@ -87,7 +88,8 @@ class ProductController extends Controller
         //
         $product = Product::find($id);
         $category = Categories::where('status',1)->get();
-        $categoryFirstId = Categories::first()->id;
+        $categoryFirstId = Categories::first();
+        $categoryFirstId = empty($categoryFirstId) ? 0 : $categoryFirstId->id;
         $producttype = ProductTypes::where('idCategory',$categoryFirstId)->where('status',1)->get();
         return response()->json(['product' => $product,'producttype' => $producttype,'category' => $category]);
     }
@@ -103,15 +105,23 @@ class ProductController extends Controller
     {
         //
     }
-
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
         //
+        $image = Product::find($id);
+        if(Product::destroy($id)){
+            if(!empty($image->image)){
+                unlink('img/upload/product/'.$image->image);
+            }
+            return response()->json('Xóa thành công !');
+        }else{
+            return response()->json('Xóa thất bại !');
+        }
     }
 }
