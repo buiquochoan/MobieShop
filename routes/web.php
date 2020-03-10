@@ -11,8 +11,11 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/admin', function () {
     return view('admin.pages.index');
+});
+Route::get('/', function () {
+    return view('client.pages.index');
 });
 Route::group(['prefix' => 'admin'],function(){
 	Route::resource('category','CategoryController');
