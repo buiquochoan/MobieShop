@@ -27,7 +27,9 @@
 	<link href="assets/client/css/vnFont.css"
 	    rel="stylesheet">
 	<!-- //web fonts -->
-
+	<!-- jquery -->
+	<script src="assets/client/js/jquery-2.2.3.min.js"></script>
+	<!-- //jquery -->
 </head>
 
 <body>
@@ -436,6 +438,9 @@
 						<div class="right-w3l">
 							<input type="submit" class="form-control" value="Log in">
 						</div>
+						<div class="right-w3l">
+							<a href="login/facebook" class="form-control btn btn-primary" value="">Đăng nhập bằng facebook</a>
+						</div>
 						<div class="sub-w3l">
 							<div class="custom-control custom-checkbox mr-sm-2">
 								<input type="checkbox" class="custom-control-input" id="customControlAutosizing">
@@ -452,41 +457,69 @@
 		</div>
 	</div>
 	<!-- register -->
-	<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-hidden="true">
+	@if(isset($thongBao))
+	<div class="alert alert-danger">
+		{{ $thongBao }}
+	</div>
+	@endif
+	@if($errors->register->any())
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// body...
+			$('#registerModal').modal('show');
+		});
+	</script>
+	@endisset
+	<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Register</h5>
+					<h5 class="modal-title">Đăng ký</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="#" method="post">
+					<form action="{{ route('register') }}" method="post">
+						@csrf
 						<div class="form-group">
-							<label class="col-form-label">Your Name</label>
-							<input type="text" class="form-control" placeholder=" " name="Name" required="">
+							<label class="col-form-label">Tên tài khoản</label>
+							<input type="text" class="form-control" placeholder=" " name="name" required="" value="{{ old('name') }}">
 						</div>
+						@if($errors->register->has('name'))
+						<div class="alert alert-danger">
+							{{ $errors->register->first('name') }}
+						</div>
+						@endif
 						<div class="form-group">
 							<label class="col-form-label">Email</label>
-							<input type="email" class="form-control" placeholder=" " name="Email" required="">
+							<input type="email" class="form-control" placeholder=" " name="email" required="" value="{{ old('email') }}">
 						</div>
+						@if($errors->register->has('email'))
+						<div class="alert alert-danger">
+							{{ $errors->register->first('email') }}
+						</div>
+						@endif
 						<div class="form-group">
 							<label class="col-form-label">Password</label>
-							<input type="password" class="form-control" placeholder=" " name="Password" id="password1" required="">
+							<input type="password" class="form-control" placeholder=" " name="password" id="password1" required="" value="{{ old('password') }}">
 						</div>
+						@if($errors->register->has('password'))
+						<div class="alert alert-danger">
+							{{ $errors->register->first('password') }}
+						</div>
+						@endif
 						<div class="form-group">
 							<label class="col-form-label">Confirm Password</label>
-							<input type="password" class="form-control" placeholder=" " name="Confirm Password" id="password2" required="">
+							<input type="password" class="form-control" placeholder=" " name="re_password" id="password2" required="" value="{{ old('re_password') }}">
 						</div>
+						@if($errors->register->has('re_password'))
+						<div class="alert alert-danger">
+							{{ $errors->register->first('re_password') }}
+						</div>
+						@endif
 						<div class="right-w3l">
-							<input type="submit" class="form-control" value="Register">
-						</div>
-						<div class="sub-w3l">
-							<div class="custom-control custom-checkbox mr-sm-2">
-								<input type="checkbox" class="custom-control-input" id="customControlAutosizing2">
-								<label class="custom-control-label" for="customControlAutosizing2">I Accept to the Terms & Conditions</label>
-							</div>
+							<input type="submit" class="form-control" value="Đăng ký">
 						</div>
 					</form>
 				</div>
@@ -524,13 +557,9 @@
 	<!-- //copyright -->
 
 	<!-- js-files -->
-	<!-- jquery -->
-	<script src="assets/client/js/jquery-2.2.3.min.js"></script>
-	<!-- //jquery -->
 
 	<!-- nav smooth scroll -->
 	<!-- //nav smooth scroll -->
-
 	<!-- popup modal (for location)-->
 	<script src="assets/client/js/jquery.magnific-popup.js"></script>
 	<!-- //popup modal (for location)-->

@@ -151,7 +151,10 @@ p.dont-do a {
     -ms-transition: 0.5s all;
     transition: 0.5s all;
 }
-
+.right-w3l a{
+    margin-top: -14px;
+    margin-bottom: 15px;
+}
 .right-w3l input[type="submit"] {
     cursor: pointer;
     letter-spacing: 1px;

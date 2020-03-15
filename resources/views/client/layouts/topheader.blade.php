@@ -20,14 +20,56 @@
 						<li class="text-center border-right text-white">
 							<i class="fas fa-phone mr-2"></i> 001 234 5678
 						</li>
+						@if(Auth::check())
+						<a href="{{ route('logout') }}" class="text-white">
+							<li class="text-center border-right">
+								<i class="fas fa-sign-in-alt mr-2"></i>{{ Auth::user()->name }}</a>
+							</li>
+						</a>
+						@if(Auth::user()->password === '')
+						<div class="modal fade updatePassWord" tabindex="-1" role="dialog" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title">Update password</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<form action="{{ route('register') }}" method="post">
+											<div class="form-group">
+												<label class="col-form-label">Password</label>
+												<input type="password" class="form-control" placeholder=" " name="password" id="password1" required="">
+											</div>
+											@if($errors->has('password'))
+											<div class="alert alert-danger">
+												{{ $errors->first('password') }}
+											</div>
+											@endif
+											<div class="form-group">
+												<label class="col-form-label">Confirm Password</label>
+												<input type="password" class="form-control" placeholder=" " name="re_password" id="password2" required="">
+											</div>
+											<div class="right-w3l">
+												<input type="submit" class="form-control" value="Đăng ký">
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+						@endif
+						@else
 						<li class="text-center border-right text-white">
 							<a href="#" data-toggle="modal" data-target="#exampleModal" class="text-white">
 								<i class="fas fa-sign-in-alt mr-2"></i> Log In </a>
 						</li>
 						<li class="text-center text-white">
-							<a href="#" data-toggle="modal" data-target="#exampleModal2" class="text-white">
-								<i class="fas fa-sign-out-alt mr-2"></i>Register </a>
+							<a href="#" data-toggle="modal" data-target="#registerModal" class="text-white">
+									<i class="fas fa-sign-out-alt mr-2"></i>Register </a>
 						</li>
+						@endif
 					</ul>
 					<!-- //header lists -->
 				</div>

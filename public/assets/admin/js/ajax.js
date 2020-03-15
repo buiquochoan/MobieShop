@@ -5,7 +5,7 @@ $.ajaxSetup({
 });
 $(document).ready(function() {
 	// body...
-	$('.alert').hide();
+	//$('.alert').hide();
 	$('.edit').click(function() {
 		// body... 
 		let id = $(this).data('id');

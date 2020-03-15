@@ -24,3 +24,7 @@ Route::group(['prefix' => 'admin'],function(){
 	Route::get('ajaxProductTypeController/{idCategory}','ajaxProductTypeController@getProductType');
 	Route::post('product/{id}','ProductController@update');
 });
+Route::get('callback/{social}','HomeController@handleProviderCallback');
+Route::get('login/{social}','HomeController@redirectProvider')->name('facebook.social');
+Route::post('register','HomeController@register')->name('register');
+Route::get('logout','HomeController@logout')->name('logout');
