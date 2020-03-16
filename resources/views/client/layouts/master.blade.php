@@ -415,41 +415,60 @@
 	<!-- //shop locator (popup) -->
 
 	<!-- modals -->
+	@if($errors->login->any())
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// body...
+			$('#exampleModal').modal('show');
+		});
+	</script>
+	@endif
 	<!-- log in -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title text-center">Log In</h5>
+					<h5 class="modal-title text-center">Đăng nhập</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="#" method="post">
+					<form action="{{ route('login')}}" method="post">
+						@csrf
 						<div class="form-group">
-							<label class="col-form-label">Username</label>
-							<input type="text" class="form-control" placeholder=" " name="Name" required="">
+							<label class="col-form-label">Email</label>
+							<input type="text" class="form-control" placeholder=" " name="email" required="">
 						</div>
+						@if($errors->login->has('email'))
+						<div class="alert alert-danger">
+							{{ $errors->login->first('email') }}
+						</div>
+						@endif
 						<div class="form-group">
-							<label class="col-form-label">Password</label>
-							<input type="password" class="form-control" placeholder=" " name="Password" required="">
+							<label class="col-form-label">Mật khẩu</label>
+							<input type="password" class="form-control" placeholder=" " name="password" required="">
 						</div>
+						@if($errors->login->has('password'))
+						<div class="alert alert-danger">
+							{{ $errors->login->first('password') }}
+						</div>
+						@endif
 						<div class="right-w3l">
-							<input type="submit" class="form-control" value="Log in">
+							<input type="submit" class="form-control" value="Đăng nhập">
 						</div>
 						<div class="right-w3l">
 							<a href="login/facebook" class="form-control btn btn-primary" value="">Đăng nhập bằng facebook</a>
 						</div>
 						<div class="sub-w3l">
 							<div class="custom-control custom-checkbox mr-sm-2">
-								<input type="checkbox" class="custom-control-input" id="customControlAutosizing">
-								<label class="custom-control-label" for="customControlAutosizing">Remember me?</label>
+								<input type="checkbox" class="custom-control-input" name="remember" id="customControlAutosizing">
+								<label class="custom-control-label" for="customControlAutosizing">Nhớ mật khẩu?</label>
 							</div>
 						</div>
-						<p class="text-center dont-do mt-3">Don't have an account?
-							<a href="#" data-toggle="modal" data-target="#exampleModal2">
-								Register Now</a>
+						<p class="text-center dont-do mt-3">Bạn chưa có tài khoản ?
+							<a href="#" data-toggle="modal" data-dismiss="modal" data-target="#registerModal">
+								Đăng ký</a>
 						</p>
 					</form>
 				</div>
@@ -457,11 +476,6 @@
 		</div>
 	</div>
 	<!-- register -->
-	@if(isset($thongBao))
-	<div class="alert alert-danger">
-		{{ $thongBao }}
-	</div>
-	@endif
 	@if($errors->register->any())
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -469,7 +483,7 @@
 			$('#registerModal').modal('show');
 		});
 	</script>
-	@endisset
+	@endif
 	<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -582,6 +596,7 @@
 	<!-- start-smooth-scrolling -->
 	<script src="assets/client/js/move-top.js"></script>
 	<script src="assets/client/js/easing.js"></script>
+	<script src="assets/client/js/sweetalert2.all.min.js"></script>
 	<!-- //end-smooth-scrolling -->
 
 	<!-- smooth-scrolling-of-move-up -->
@@ -591,6 +606,28 @@
 	<script type="text/javascript" src="assets/client/js/client.js"></script>
 	<!-- //for bootstrap working -->
 	<!-- //js-files -->
+	@if(session()->has('ctSuccess'))
+	<script type="text/javascript">
+		Swal.fire({
+			position: 'top-end',
+			icon: 'success',
+			title: "{{session('ctMessage')}}",
+			showConfirmButton: false,
+			timer: 1500
+		})
+	</script>
+	@endif
+	@if(session()->has('ctErrorrs'))
+	<script type="text/javascript">
+		Swal.fire({
+			position: 'top-end',
+			icon: 'error',
+			title: "{{session('ctMessage')}}",
+			showConfirmButton: false,
+			timer: 1500
+		})
+	</script>
+	@endif
 </body>
 
 </html>

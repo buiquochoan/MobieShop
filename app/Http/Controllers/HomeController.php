@@ -50,14 +50,14 @@ class HomeController extends Controller
     }
     public function register(Request $request){
     	$validator = Validator::make($request->all(), [
-            'name' => 'required|min:2|max:255|unique:users',
-            'email' => 'required|email|min:2|max:255',
+            'name' => 'required|min:1|max:255',
+            'email' => 'required|email|min:1|max:255|unique:users',
             'password' => 'required',
             're_password' => 'required|same:password'
         ],
         [
-            'min' => ':attribute phải từ 2 đến 255 ký tự',
-            'max' => ':attribute phải từ 2 đến 255 ký tự',
+            'min' => ':attribute phải từ 1 đến 255 ký tự',
+            'max' => ':attribute phải từ 1 đến 255 ký tự',
             'unique' => ':attribute đã được sử dụng',
             'required' => ':attribute không được để trống',
             'email' => ':attribute phải đúng định dạng email',
@@ -73,10 +73,35 @@ class HomeController extends Controller
         }
         $data = $request->all();
         $data['password'] = Hash::make($request->password);
-        if(User::create($data)){
-        	return back()->with('thongBao','Đăng ký thành công');
+        $user = User::create($data);
+        Auth::login($user);
+        return back();
+    }
+    public function login(Request $request){
+    	$validator = Validator::make($request->all(), [
+            'email' => 'required|email|min:1|max:255',
+            'password' => 'required',
+        ],
+        [
+            'min' => ':attribute phải từ 1 đến 255 ký tự',
+            'max' => ':attribute phải từ 1 đến 255 ký tự',
+            'required' => ':attribute không được để trống',
+            'email' => ':attribute phải đúng định dạng email',
+        ],
+        [ 
+             'email'=>'Email',
+             'password' => 'Mật khẩu',
+        ]);
+        if ($validator->fails()) {
+            return back()->withErrors($validator, 'login')->withInput();
+        }
+
+        $user = $request->only('email', 'password');
+        if (Auth::attempt($user,$request->has('remember'))) {
+            // Authentication passed...
+            return back()->with(['ctSuccess' => 1,'ctMessage' => 'Đăng nhập thành công']);
         }else{
-        	return back()->with('thongBao','Đăng ký thất bại');
+			return back()->with(['ctErrorrs' => 1,'ctMessage' => 'Đăng nhập thất bại']);
         }
     }
 }

@@ -28,3 +28,4 @@ Route::get('callback/{social}','HomeController@handleProviderCallback');
 Route::get('login/{social}','HomeController@redirectProvider')->name('facebook.social');
 Route::post('register','HomeController@register')->name('register');
 Route::get('logout','HomeController@logout')->name('logout');
+Route::post('login','HomeController@login')->name('login');
