@@ -14,9 +14,7 @@
 Route::get('/admin', function () {
     return view('admin.pages.index');
 });
-Route::get('/', function () {
-    return view('client.pages.index');
-});
+Route::get('/','HomeController@index');
 Route::group(['prefix' => 'admin'],function(){
 	Route::resource('category','CategoryController');
 	Route::resource('productType','ProductTypeController');
@@ -24,8 +22,8 @@ Route::group(['prefix' => 'admin'],function(){
 	Route::get('ajaxProductTypeController/{idCategory}','ajaxProductTypeController@getProductType');
 	Route::post('product/{id}','ProductController@update');
 });
-Route::get('callback/{social}','HomeController@handleProviderCallback');
-Route::get('login/{social}','HomeController@redirectProvider')->name('facebook.social');
-Route::post('register','HomeController@register')->name('register');
-Route::get('logout','HomeController@logout')->name('logout');
-Route::post('login','HomeController@login')->name('login');
+Route::get('callback/{social}','UserController@handleProviderCallback');
+Route::get('login/{social}','UserController@redirectProvider')->name('facebook.social');
+Route::post('register','UserController@registerClient')->name('register');
+Route::get('logout','UserController@logoutClient')->name('logout');
+Route::post('login','UserController@loginClient')->name('login');

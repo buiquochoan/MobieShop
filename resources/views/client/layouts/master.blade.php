@@ -20,6 +20,8 @@
 	<link href="assets/client/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
 	<!-- pop-up-box -->
 	<link href="assets/client/css/menu.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="assets/client/css/client.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="assets/client/css/navCategory.css" rel="stylesheet" type="text/css" media="all" />
 	<!-- menu style -->
 	<!-- //Custom-Files -->
 	<!-- web fonts -->
