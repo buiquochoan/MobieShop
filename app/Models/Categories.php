@@ -14,6 +14,6 @@ class Categories extends Model
     public function ProductTypes()
     {
     	# code...
-    	return $this->hasMany('App\Models\ProductTypes','idCategory','id');
+    	return $this->hasMany('App\Models\ProductTypes','idCategory','id')->where('status',1);
     }
 }

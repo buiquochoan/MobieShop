@@ -142,6 +142,7 @@ $(document).ready(function() {
 
 
 	$('.editProduct').click(function(){
+		$('.alert').hide();
 		let id = $(this).data('id');
 		$.ajax({
 			url:'/admin/product/'+id+'/edit',

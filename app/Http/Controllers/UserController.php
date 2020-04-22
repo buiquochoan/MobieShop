@@ -183,4 +183,21 @@ class UserController extends Controller
             return back()->with(['ctErrorrs' => 1,'ctMessage' => 'Đăng nhập thất bại']);
         }
     }
+    public function loginAdmin(Request $request){
+        $user = $request->only('email', 'password');
+        if (Auth::attempt($user,$request->has('remember'))) {
+            // Authentication passed...
+            if(Auth::user()->ruler === 1){
+                return redirect('/admin')->with(['ctSuccess' => 1,'ctMessage' => 'Đăng nhập thành công']);
+            }else if(Auth::user()->ruler === 2){
+                return redirect()->route('product.index');
+            }else if(Auth::user()->ruler === 3){
+                return redirect()->route('order.index');
+            }else{
+                return redirect()->route('admin.login')->with(['ctErrorrs' => 1,'ctMessage' => 'Bạn chưa được phân quyền']);
+            }
+        }else{
+            return back()->with(['ctErrorrs' => 1,'ctMessage' => 'Đăng nhập thất bại']);
+        }
+    }
 }

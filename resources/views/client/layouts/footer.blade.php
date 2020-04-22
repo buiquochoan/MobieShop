@@ -408,3 +408,4 @@
 	</div>
 	<!-- //footer fourth section (text) -->
 </footer>
+<script src="js/dist/jquery.fancybox.min.js"></script>

@@ -46,16 +46,7 @@
 								<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
 									<form action="#" method="post">
 										<fieldset>
-											<input type="hidden" name="cmd" value="_cart" />
-											<input type="hidden" name="add" value="1" />
-											<input type="hidden" name="business" value=" " />
-											<input type="hidden" name="item_name" value="{{ $val->name }}" />
-											<input type="hidden" name="amount" value="200.00" />
-											<input type="hidden" name="discount_amount" value="1.00" />
-											<input type="hidden" name="currency_code" value="USD" />
-											<input type="hidden" name="return" value=" " />
-											<input type="hidden" name="cancel_return" value=" " />
-											<input type="submit" name="submit" value="Add to cart" class="button btn" />
+											<a href="{{ route('addCart',['id' => $val->id]) }}" class="button btn">Thêm vào giỏ hàng</a>
 										</fieldset>
 									</form>
 								</div>
@@ -67,60 +58,49 @@
 			</div>
 			<!-- //first section -->
 			<!-- second section -->
-			@foreach($categoriesContent as $valCate)
-				<div id='cssmenu'>
-				<ul>
-					<li class='active'><a href="javascript:void(0)">{{ $valCate->name }}</a></li>
-					@if(count($valCate->ProductTypes) > 0)
-						@foreach($valCate->ProductTypes as $valProT)
-						<li><a href='#'>{{ $valProT->name }}</a></li>
-						@endforeach
-					@endif
-				</ul>
-				</div>
+			@if(!empty($productTypesFirst))
 				<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
-					<!-- <h3 class="heading-tittle text-center font-italic">Tv & Audio</h3> -->
+					<h3 class="heading-tittle text-center font-italic">{{ $productTypesFirst->name }}</h3>
 					<div class="row">
-						<div class="col-md-4 product-men mt-5">
-							<div class="men-pro-item simpleCart_shelfItem">
-								<div class="men-thumb-item text-center">
-									<img src="assets/client/images/m4.jpg" alt="">
-									<div class="men-cart-pro">
-										<div class="inner-men-cart-pro">
-											<a href="single.html" class="link-product-add-cart">Quick View</a>
+						@if(!empty($mobie2))
+							@foreach($mobie2 as $val)
+								<div class="col-md-4 product-men mt-5">
+									<div class="men-pro-item simpleCart_shelfItem">
+										<div class="men-thumb-item text-center">
+											@if(!empty($val->image))
+											<img class="imgProduct" src="img/upload/product/{{ $val->image }}" alt="Chưa có ảnh">
+											@else
+											<img class="imgProduct" src="assets/client/images/no-image-prod.webp" alt="Chưa có ảnh">
+											@endif
+											<div class="men-cart-pro">
+												<div class="inner-men-cart-pro">
+													<a href="#" class="link-product-add-cart">Chi tiết</a>
+												</div>
+											</div>
+										</div>
+										<div class="item-info-product text-center border-top mt-4">
+											<h4 class="pt-1">
+												<a href="#">{{ $val->name }}</a>
+											</h4>
+											<div class="info-product-price my-2">
+												<span class="item_price">{{ number_format($val->promotional) }} đ</span>
+												<del>{{ number_format($val->price) }} đ</del>
+											</div>
+											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+												<form action="#" method="post">
+													<fieldset>
+														<a href="{{ route('addCart',['id' => $val->id]) }}" class="button btn">Thêm vào giỏ hàng</a>
+													</fieldset>
+												</form>
+											</div>
 										</div>
 									</div>
 								</div>
-								<div class="item-info-product text-center border-top mt-4">
-									<h4 class="pt-1">
-										<a href="single.html">Sony 80 cm (32 inches)</a>
-									</h4>
-									<div class="info-product-price my-2">
-										<span class="item_price">$320.00</span>
-										<del>$340.00</del>
-									</div>
-									<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-										<form action="#" method="post">
-											<fieldset>
-												<input type="hidden" name="cmd" value="_cart" />
-												<input type="hidden" name="add" value="1" />
-												<input type="hidden" name="business" value=" " />
-												<input type="hidden" name="item_name" value="Sony 80 cm (32 inches)" />
-												<input type="hidden" name="amount" value="320.00" />
-												<input type="hidden" name="discount_amount" value="1.00" />
-												<input type="hidden" name="currency_code" value="USD" />
-												<input type="hidden" name="return" value=" " />
-												<input type="hidden" name="cancel_return" value=" " />
-												<input type="submit" name="submit" value="Add to cart" class="button btn" />
-											</fieldset>
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
+							@endforeach
+						@endif
 					</div>
 				</div>
-			@endforeach
+			@endif
 			<!-- //second section -->
 		</div>
 	</div>

@@ -14,11 +14,11 @@ class Product extends Model
     public function Category()
     {
     	# code...
-    	return $this->belongsTo('App\Models\Categories','idCategory','id');
+    	return $this->belongsTo('App\Models\Categories','idCategory','id')->where('status',1);
     }
     public function ProductType()
     {
     	# code...
-    	return $this->belongsTo('App\Models\ProductTypes','idProductType','id');
+    	return $this->belongsTo('App\Models\ProductTypes','idProductType','id')->where('status',1);
     }
 }

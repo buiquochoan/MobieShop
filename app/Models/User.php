@@ -15,6 +15,7 @@ class User extends Authenticatable
      *
      * @var array
      */
+
     protected $fillable = [
         'name', 'email', 'password', 'ruler' , 'status','avatar','social_id'
     ];
@@ -29,4 +30,10 @@ class User extends Authenticatable
     ];
 
     protected $table = 'users';
+
+    public function customer()
+    {
+        # code...
+        return $this->hasMany('App\Models\Customer','idUser','id');
+    }
 }

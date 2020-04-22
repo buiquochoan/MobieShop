@@ -22,7 +22,7 @@
     <!-- Custom styles for this template-->
     <link href="assets/admin/css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="js/dist/jquery.fancybox.min.css" />
-
+    <script src="assets/admin/vendor/jquery/jquery.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -54,6 +54,42 @@
             <!-- End of Main Content -->
 
            @include('admin.layouts.footer')
+           
 </body>
 
 </html>
+<script src="assets/client/js/sweetalert2.all.min.js"></script>
+<!-- Bootstrap core JavaScript-->
+<script src="assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="assets/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="assets/admin/js/sb-admin-2.min.js"></script>
+<script src="js/dist/jquery.fancybox.min.js"></script>
+<script src="/ckeditor/ckeditor.js"></script>
+
+<script src="assets/admin/js/ajax.js"></script>
+<script src="assets/admin/js/myApp.js"></script>
+@if(session()->has('ctSuccess'))
+<script type="text/javascript">
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: "{{session('ctMessage')}}",
+        showConfirmButton: false,
+        timer: 1500
+    });
+</script>
+@endif
+@if(session()->has('ctErrorrs'))
+<script type="text/javascript">
+    Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: "{{session('ctMessage')}}",
+        showConfirmButton: false,
+        timer: 1500
+    });
+</script>
+@endif
